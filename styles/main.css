@@ -155,3 +155,9 @@ input {
   display: block;
   margin: 20px auto;
 }
+.hero-img {
+  width: 250px;
+  max-width: 90%;
+  margin: 20px auto;
+  display: block;
+}
