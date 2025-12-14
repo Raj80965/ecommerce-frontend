@@ -15,12 +15,16 @@
     <nav>
         <a href="#">Home</a>
         <a href="#products">Products</a>
+        <a href="login.html">Login</a>
+
         <a href="#">About</a>
         <a href="#">Contact</a>
     </nav>
 
     <input type="text" placeholder="Search">
-    <span>🛒</span>
+    <a href="cart.html">🛒 <span id="cartCount">0</span></a>
+
+
     <button class="menu-btn">☰</button>
 </header>
 
@@ -29,6 +33,8 @@
     <div class="hero-content">
         <h1>Biggest Sale of the Year!</h1>
         <p>Best products at the best prices</p>
+                <img src="images/test.webp" loading="lazy" width="300">
+
         <button>Shop Now</button>
     </div>
 </section>
@@ -37,8 +43,9 @@
 <section class="products" id="products">
     <h2>Our Products</h2>
     <div class="product-grid" id="productGrid">
-        <!-- Products JS se yaha aayenge -->
-    </div>
+    <p id="loading">Loading products...</p>
+</div>
+
 </section>
 
 <!-- MAIN CONTENT -->
@@ -46,6 +53,7 @@
     <h1>Welcome to Our Online Store</h1>
 </main>
 
-<script src="scripts/app.js"></script>
+<script src="scripts/app.js" defer></script>
+
 </body>
 </html>

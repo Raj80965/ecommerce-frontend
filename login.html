@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      color: blue;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD91Ht67-G21GRe6UcY9IJbC_J62YyT-ks",
+    authDomain: "ecommerce-frontend-d7e1d.firebaseapp.com",
+    projectId: "ecommerce-frontend-d7e1d",
+    storageBucket: "ecommerce-frontend-d7e1d.appspot.com",
+    messagingSenderId: "248980348534",
+    appId: "1:248980348534:web:0040d171a29694d0d10957"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // 🔐 SIGNUP
+  window.signup = function () {
+    const email = signupEmail.value;
+    const password = signupPassword.value;
+    const confirm = confirmPassword.value;
+
+    if (password !== confirm) {
+      signupError.innerText = "Passwords do not match";
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Signup successful");
+        window.location.href = "index.html";
+      })
+      .catch(err => signupError.innerText = err.message);
+  };
+
+  // 🔓 LOGIN
+  window.login = function () {
+    const email = loginEmail.value;
+    const password = loginPassword.value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Login successful");
+        window.location.href = "index.html";
+      })
+      .catch(err => loginError.innerText = err.message);
+  };
+</script>
+
+</head>
+<body>
+
+<div class="box">
+
+  <!-- LOGIN FORM -->
+  <div id="loginForm">
+    <h2>Login</h2>
+
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+
+    <p class="error" id="loginError"></p>
+
+    <button onclick="login()">Login</button>
+
+    <div class="link" onclick="showSignup()">New user? Signup</div>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div id="signupForm" style="display:none;">
+    <h2>Signup</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="email" id="signupEmail" placeholder="Email">
+    <input type="password" id="signupPassword" placeholder="Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+    <p class="error" id="signupError"></p>
+
+    <button onclick="signup()">Signup</button>
+
+    <div class="link" onclick="showLogin()">Already have account? Login</div>
+  </div>
+
+</div>
+
+<script>
+  function showSignup() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+  }
+
+  function showLogin() {
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+  }
+</script>
+
+
+</body>
+</html>
